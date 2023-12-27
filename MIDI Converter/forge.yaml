@@ -1,0 +1,35 @@
+project_name: "MIDI Converter"
+board_version: 0.0.1
+
+
+gcode_files:
+  drill.nc:
+    - !cut_board # Cut through holes.
+      drill_file: "/home/andresh/Documents/Convertidor Casio CT-638/MIDI Converter/MIDI Converter.drl"
+
+      gcode_file: drill.nc
+
+      machine_config: CNC3018/copper_plate_drill
+
+      backside: true
+  edge-cut.nc:
+    - !cut_board 
+
+       gerber_file: "/home/andresh/Documents/Convertidor Casio CT-638/MIDI Converter/MIDI Converter-Edge_Cuts.gbr"
+
+       gcode_file: edge.nc
+
+       machine_config: CNC3018/copper_plate_mill
+
+       select_lines: all
+       backside: true
+       
+  etching.nc:
+    - !cut_board # Engrave back copper etching mask.
+        gerber_file: "/home/andresh/Documents/Convertidor Casio CT-638/MIDI Converter/MIDI Converter-B_Cu.gbr"
+
+        gcode_file: etching.nc
+
+        machine_config: CNC3018/copper_plate_etch
+
+        backside: true
